@@ -1,0 +1,60 @@
+import React, { Component } from 'react';
+import TokenService from '../services/TokenService';
+import { Link } from 'react-router-dom'
+
+
+export default class LoginForm extends Component {
+    state = {error: null}
+
+    handleSubmitJwtAuth = ev => {
+        ev.preventDefault()
+        const {user_name, user_pass } = ev.target
+
+        const user = {
+            user_name: user_name.value,
+            password: user_pass.value
+        }
+        console.log(user)
+        
+        fetch('http://localhost:8000/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()    
+        )
+        .then(res => {
+            user_name.value = ''
+            user_pass.value = ''
+            TokenService.saveAuthToken(res.saveAuthToken)
+            this.props.onLoginSuccess()
+        })
+        .catch(res => {
+            this.setState({error: res.error})
+        })
+    }
+    render() {
+        return (
+            <div className="Login_form">
+                <h2>Log In</h2>
+                <form className="Login" onSubmit={this.handleSubmitJwtAuth}>
+
+                    <label htmlFor="user_name">User Name</label>
+                    <input name="user_name" id="user_name" type="text" />
+
+                    <label htmlFor="user_pass">Password</label>
+                    <input name="user_pass" id="user_pass" type="password" />
+
+                    <button type="submit">Log In</button>
+                    {this.state.error !== null ? <p>{this.state.error}</p> : <p></p>}
+                    <Link to='/register'><button>Register Account</button></Link>
+                </form>
+            </div>
+        )
+    }
+}
