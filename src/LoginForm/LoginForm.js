@@ -16,7 +16,7 @@ export default class LoginForm extends Component {
         }
         console.log(user)
         
-        fetch('http://localhost:8000/api/auth/login', {
+        fetch('https://agile-ravine-21756.herokuapp.com/api/auth/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -29,9 +29,10 @@ export default class LoginForm extends Component {
                 : res.json()    
         )
         .then(res => {
+            window.sessionStorage.setItem('user', user_name.value)
             user_name.value = ''
             user_pass.value = ''
-            TokenService.saveAuthToken(res.saveAuthToken)
+            TokenService.saveAuthToken(res.authToken)
             this.props.onLoginSuccess()
         })
         .catch(res => {

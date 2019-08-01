@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "name": "youtube-theater",
+    "alias": "bmmeehan3-youtube-theater-app",
+    "routes": [
+        {
+          "src": "^/static/(.*)",
+          "dest": "/static/$1"
+        },
+        {
+          "src": ".*",
+          "dest": "/index.html"
+        }
+    ]
+  }

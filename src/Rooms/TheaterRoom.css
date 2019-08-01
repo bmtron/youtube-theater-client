@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+.room_nav {
+    position: fixed;
+    top: 0;
+    height: 50px;
+    background-color: lightgray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.room_nav a {
+    position: fixed;
+    right: 0;
+}
+.room_nav h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.room_main_content {
+    display: flex;
+}
+.video {
+    margin-top: 60px;
+    width: 80%;
+}
+.chat_box {
+    margin-top: 50px;
+    width: 20%;
+}
+.chat_box li {
+    list-style-type: none;
+    text-align: right;
+}

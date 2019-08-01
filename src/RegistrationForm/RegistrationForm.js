@@ -16,7 +16,7 @@ export default class RegistrationForm extends Component {
             password: reg_user_pass.value
         }
         console.log(user)
-        fetch('http://localhost:8000/api/users', {
+        fetch('https://agile-ravine-21756.herokuapp.com/api/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

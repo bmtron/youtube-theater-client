@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import TheaterRoom from './TheaterRoom'
 
+
 export default class RoomPage extends Component {
     render() {
         return (

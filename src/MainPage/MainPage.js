@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LogoutButton from '../LogoutButton/LogoutButton';
 
 export default class MainPage extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export default class MainPage extends Component {
         this.setState({
             rooms: [...this.state.rooms, room]
         })
-        fetch('http://localhost:8000/api/rooms', {
+        fetch('https://agile-ravine-21756.herokuapp.com/api/rooms', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -42,7 +43,7 @@ export default class MainPage extends Component {
         })
     }
     componentDidMount() {
-        fetch('http://localhost:8000/api/rooms', {
+        fetch('https://agile-ravine-21756.herokuapp.com/api/rooms', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json'
@@ -69,6 +70,7 @@ export default class MainPage extends Component {
     render() {
         return (
             <div>
+                <LogoutButton />
                 {this.state.rooms !== null ? this.state.rooms.map((item, index) => {
                     return <Link key={index} to={`/rooms/${item.name}`}><button>Room {item.name}</button></Link>
                 }) : null}

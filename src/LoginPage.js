@@ -12,6 +12,7 @@ export default class LoginPage extends Component {
         const { history } = this.props
         history.push('/main')
     }
+   
     render() {
         return (
             <div>
