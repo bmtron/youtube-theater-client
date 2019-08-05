@@ -19,6 +19,7 @@ export default class TheaterRoom extends Component {
             sourceInput: '',
             welcome: '',
             paused: null,
+            sourceSent: false,
             hide: 'hidden'
         }
         socket.on('receive message', (payload) => {
@@ -44,7 +45,8 @@ export default class TheaterRoom extends Component {
     }
     updateVidSource(payload) {
         this.setState({
-            source: payload
+            source: payload,
+            hide: payload.hide
         })
     }
     updateMessageFromSockets(payload) {
@@ -71,7 +73,8 @@ export default class TheaterRoom extends Component {
         e.preventDefault();
         socket.emit('video source', {
             room: this.props.room,
-            source: this.parseYoutubeLink(this.state.sourceInput)
+            source: this.parseYoutubeLink(this.state.sourceInput),
+            hidden: 'notHidden'
         })
         this.setState({
             sourceInput: '',
@@ -111,6 +114,7 @@ export default class TheaterRoom extends Component {
         
       }
     componentDidUpdate() {
+
         if (this.state.source === '') {
             return null;
         }
