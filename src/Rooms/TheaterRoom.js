@@ -19,9 +19,11 @@ export default class TheaterRoom extends Component {
             sourceInput: '',
             welcome: '',
             paused: null,
+            hide: 'hidden'
         }
         socket.on('receive message', (payload) => {
             this.updateMessageFromSockets(payload)
+            this.stayScrolledToBottom();
         })
         socket.on('update vid', (payload) => {
             this.updateVidSource(payload)
@@ -71,12 +73,27 @@ export default class TheaterRoom extends Component {
             room: this.props.room,
             source: this.parseYoutubeLink(this.state.sourceInput)
         })
+        this.setState({
+            sourceInput: '',
+            hide: 'notHidden'
+        })
     }
-    handleSourceChange = (e) => {
+    updateSource = (e) => {
         e.preventDefault();
         this.setState({
             sourceInput: e.target.value
         })
+    }
+    disableSubmit() {
+        if (this.state.sourceInput.length === 0 ) {
+            return false
+        }
+        if (!this.state.sourceInput.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/)) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
     componentDidMount() {
        const room = this.props.room;
@@ -117,18 +134,25 @@ export default class TheaterRoom extends Component {
     }
 
     togglePause = (state) => {
-
         socket.emit('pause', {
             room: this.props.room,
             paused: true
         })
     }
     togglePlay = (state) => {
-
         socket.emit('pause', {
             room: this.props.room,
             paused: false
         })
+    }
+    showPlayer = () => {
+            this.setState({
+                hide: 'notHidden'
+            })
+    }
+    stayScrolledToBottom() {
+        let chat = document.getElementById('chat');
+        chat.scrollTop = chat.scrollHeight;
     }
     render() {
         console.log(this.state.message)
@@ -137,25 +161,30 @@ export default class TheaterRoom extends Component {
                 <nav className="room_nav">
                     <LogoutButton />
                     <h3>Welcome to room {this.props.room}</h3>
+                    <Link to='/main'><button className="home_button">Home</button></Link>
                 </nav>
                 <section className="room_main_content">
                     <section className="video">
-                        <div id='player'>
-                            {this.state.source === '' ? <p></p> :  <iframe width="560" title="vid" height="315" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://localhost:3000&autoplay=1&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
+                    <div class="blank"></div>
+                        <div id='player' className={this.state.hide}>
+                            {this.state.source === '' ? <p></p>:  <iframe width="100%" title="vid" height="100%" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://localhost:3000&autoplay=1&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
                         </div>
-                        <input name="vid" id="vid" value={this.state.sourceInput} onChange={(e) => this.handleSourceChange(e)}/>
-                        <button type="submit" onClick={(e) => this.handleSubmitVideo(e)}>New Video</button>
-                        <Link to='/main'><button>Home</button></Link>
-                        <button onClick={() => this.togglePause(this.state.paused)}>Pause</button>
-                        <button onClick={() => this.togglePlay(this.state.paused)}>Play</button>
+                        <section className="vid_controls">
+                            <input name="vid" id="vid" value={this.state.sourceInput} placeholder="Enter YouTube URL here!" onChange={(e) => this.updateSource(e)}/>
+                            <button className="submit" type="submit" disabled={!this.disableSubmit()} onClick={(e) => this.handleSubmitVideo(e)}>New Video</button>
+                            <section className="pause_play">
+                                <button className="pause" onClick={() => this.togglePause(this.state.paused)}>Pause</button>
+                                <button className="play" onClick={() => this.togglePlay(this.state.paused)}>Play</button>
+                            </section>
+                        </section>
                     </section>
                     <section className="chat_box">
-                        <ul className="chat">{this.state.message.length ? this.state.message.map((item, index) => {
+                        <ul id="chat" className="chat">{this.state.message.length ? this.state.message.map((item, index) => {
                             return <li key={index}>{item}</li> }) : null}
                         </ul>
                         <form className="message_box">
-                            <input name="test" id="test" value={this.state.input} onChange={(e) => this.handleChange(e)} />
-                            <button type="submit" onClick={(e) => this.handleSubmitMessage(e)}>Submit</button>
+                            <input name="chat_message" id="chat_message" className="chat_message" value={this.state.input} onChange={(e) => this.handleChange(e)} />
+                            <button type="submit" className="chat_button" onClick={(e) => this.handleSubmitMessage(e)}>Chat</button>
                         </form>
                     </section>
                 </section>

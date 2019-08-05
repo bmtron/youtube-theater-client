@@ -6,6 +6,7 @@ import './LogoutButton.css';
 export default class LogoutButton extends Component {
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
+        window.sessionStorage.removeItem('user');
       }
     render() {
         return (

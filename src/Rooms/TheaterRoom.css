@@ -1,35 +1,406 @@
 * {
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
-.room_nav {
-    position: fixed;
-    top: 0;
-    height: 50px;
-    background-color: lightgray;
-    width: 100%;
+html {
+    height: 100vh;
+}
+body {
+    margin: 0;
+}
+button:hover {
+    cursor: pointer;
+}
+.vid_controls {
     display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 100px;
+    align-items: center;
     justify-content: center;
+    background-color: #322f37;
+    padding: 10px;
+    border-radius: 0;
 }
-.room_nav a {
-    position: fixed;
-    right: 0;
+.pause, .play, .submit {
+    height: 25px;
+    width: 100px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
 }
-.room_nav h3 {
-    margin-top: 0px;
-    margin-bottom: 0px;
+.vid_controls input {
+    width: 300px;
+    height: 25px;
+    background-color: rgb(226, 236, 245);
+    padding: 0;
+    border: none;
+}
+.chat_message {
+    padding: 0;
+    font-size: 16px;
+}
+.chat_button {
+    border: 1px solid gray;
+    margin-left: 5px;
+    width: 60px;
+    padding: 0;
+    height: 30px;
+    font-size: 16px;
+}
+.chat_button:hover {
+    color: white;
+    background-color: black;
+}
+.chat {
+    color: white;
 }
 .room_main_content {
-    display: flex;
+    background-color: #0f0e11;
 }
-.video {
-    margin-top: 60px;
-    width: 80%;
+@media screen and (min-width: 1201px) {
+    html {
+        height: 100vh;
+    }
+    body {
+        height: 100vh;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: lightgray;
+    }
+    .home_button {
+        width: 125px;
+        height: 25px;
+        margin-right: 15px;
+        margin-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        border: none;
+        position: fixed;
+        right: 140px;
+    }
+    .home_button:hover {
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
+    .logout_button {
+        position: fixed;
+        right: 0;
+    }
+    .room_page {
+        height: 100vh;
+    }
+    .room_main_content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100vh;
+    }
+    .video {
+        width: 80%;
+        max-width: 1600px;
+        height: 50%;
+        padding-left: 150px;
+        padding-right: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        margin-left: 15px;
+        align-self: center;
+    }
+    .hidden {
+        display: none;
+    }
+    .notHidden {
+        display: block;
+    }
+    .blank {
+        display: none;
+    }
+    .vid_controls {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: 100px;
+        align-items: center;
+        justify-content: center;
+        background-color: #322f37;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .vid_controls input {
+        width: 300px;
+        height: 25px;
+        background-color: rgb(226, 236, 245);
+        padding: 0;
+        border: none;
+    }
+    #player {
+        align-self: center;
+        width: 100%;
+        min-height: 550px;
+    }
+    .chat_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        width: 20%;
+        align-items: center;
+        border: 1px solid lightslategray;
+        border-right: none;
+        border-bottom: none;
+    }
+    .chat {
+        list-style-type: none;
+        padding-left: 0px;
+        width: 90%;
+        margin-top: 80px;
+        max-height: 100%;
+        text-align: left;
+        overflow-y: auto;
+    }
+    .chat li {
+        margin-left: 15px;
+        border-radius: 5px;
+    }
+    .message_box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .chat_message {
+        height: 30px;
+        border: 1px solid black;
+        width: 75%;
+    }
 }
-.chat_box {
-    margin-top: 50px;
-    width: 20%;
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+    html {
+        height: 100vh;
+    }
+    body {
+        height: 100vh;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: lightgray;
+    }
+    .logout_button {
+        position: fixed;
+        right: 0;
+    }
+    .room_page {
+        height: 100vh;
+    }
+    .room_main_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+    }
+    .video {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #player {
+        align-self: center;
+        width: 100%;
+        min-height: 400px;
+    }
+    .chat_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 50%;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .chat {
+        list-style-type: none;
+        padding-left: 0px;
+        width: 90%;
+        max-height: 250px;
+        text-align: right;
+        overflow-y: auto;
+    }
+    .chat li {
+        margin-right: 15px;
+    }
+    .message_box {
+        width: 100%;
+    }
+    .chat_message {
+        height: 30px;
+        border: 1px solid black;
+        width: 75%;
+    }
 }
-.chat_box li {
-    list-style-type: none;
-    text-align: right;
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    html {
+        height: 100vh;
+    }
+    body {
+        height: 100vh;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: lightgray;
+    }
+    .logout_button {
+        position: fixed;
+        right: 0;
+    }
+    .room_page {
+        height: 100vh;
+    }
+    .room_main_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+    }
+    .video {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #player {
+        align-self: center;
+        margin-top: 50px;
+        width: 100%;
+        min-height: 400px;
+    }
+    .chat_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 50%;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .chat {
+        list-style-type: none;
+        padding-left: 0px;
+        width: 90%;
+        max-height: 250px;
+        text-align: right;
+        overflow-y: auto;
+    }
+    .chat li {
+        margin-right: 15px;
+    }
+    .message_box {
+        width: 100%;
+    }
+    .chat_message {
+        height: 30px;
+        border: 1px solid black;
+        width: 75%;
+    }
+}
+@media screen and (max-width: 600px) {
+    html {
+        height: 100vh;
+    }
+    body {
+        height: 100vh;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: lightgray;
+    }
+    
+    .logout_button {
+        position: fixed;
+        right: 0;
+    }
+    .room_page {
+        height: 100vh;
+    }
+    .room_main_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+    }
+    .video {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .vid_controls {
+        height: 100px;
+        width: 100%;
+    }
+    #player {
+        align-self: center;
+        width: 100%;
+        margin-top: 50px;
+        min-height: 230px;
+    }
+    .chat_box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 50%;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .chat {
+        list-style-type: none;
+        padding-left: 0px;
+        width: 90%;
+        max-height: 250px;
+        text-align: right;
+        overflow-y: auto;
+    }
+    .chat li {
+        margin-right: 15px;
+    }
+    .message_box {
+        width: 100%;
+    }
+    .chat_message {
+        height: 30px;
+        border: 1px solid black;
+        width: 75%;
+    }
 }

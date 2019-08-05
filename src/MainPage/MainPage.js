@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
-
+import ValidationError from '../Utils/ValidationError';
 export default class MainPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
             rooms: [1, 2],
-            error: null
+            error: null,
+            roomName: '',
+            roomNameValid: false,
+            validationMessages: {
+                roomName: ''
+            }
         }
     }
     handleCreateRoom = ev => {
@@ -33,13 +38,13 @@ export default class MainPage extends Component {
                 ? res.json().then(e => Promise.reject(e))
                 : res.json()
         )
-        .then(res => {
-            create_room.value = ''
-        })
         .catch(err => {
             this.setState({
                 error: err
             })
+        })
+        this.setState({
+            roomName: ''
         })
     }
     componentDidMount() {
@@ -67,6 +72,24 @@ export default class MainPage extends Component {
             })
         })
     }
+    validateRoomName(fieldValue) {
+        const fieldErrors = {...this.state.validationMessages}
+        let hasError = false;
+
+        const roomName = fieldValue.trim();
+
+        if(roomName.length === 0 || roomName.length > 25) {
+            fieldErrors.roomName = 'Room name must be greater than 0 and less than 25 characters.';
+            hasError = true;
+        }
+        this.setState({
+            validationMessages: fieldErrors,
+            roomNameValid: !hasError
+        })
+    }
+    updateRoomName(roomName) {
+        this.setState({roomName}, () => {this.validateRoomName(roomName)})
+    }
     render() {
         return (
             <div>
@@ -76,8 +99,10 @@ export default class MainPage extends Component {
                 }) : null}
                 <form className="create_room" onSubmit={this.handleCreateRoom}>
                     <label htmlFor="create_room">Room Name</label>
-                    <input name="create_room" id="create_room" type="text"/>
-                    <button>Create Room</button>
+                    <input name="create_room" id="create_room" type="text" value={this.state.roomName} onChange={e => this.updateRoomName(e.target.value)}/>
+                    <ValidationError hasError={!this.state.roomNameValid} message={this.state.validationMessages.roomName}/>
+
+                    <button disabled={!this.state.roomNameValid}>Create Room</button>
                 </form>
             </div>
         )
