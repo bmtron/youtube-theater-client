@@ -154,20 +154,29 @@ export default class TheaterRoom extends Component {
         let chat = document.getElementById('chat');
         chat.scrollTop = chat.scrollHeight;
     }
+    submitChat = (e) => {
+        if (e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            this.handleSubmitMessage(e)
+        }
+    }
     render() {
-        console.log(this.state.message)
+
         return (
             <div className="room_page">
                 <nav className="room_nav">
-                    <LogoutButton />
-                    <h3>Welcome to room {this.props.room}</h3>
-                    <Link to='/main'><button className="home_button">Home</button></Link>
+                    <h2>Theater Room {this.props.room}</h2>
+                    <section className="nav_buttons">
+                        <LogoutButton />
+                        <Link to='/main'><button className="home_button">Home</button></Link>
+                    </section>
                 </nav>
                 <section className="room_main_content">
                     <section className="video">
-                    <div class="blank"></div>
+                        <div className="blank"></div>
+                        {this.state.source === '' ? <p className="instructions">Submit a YouTube link below to start sharing videos!</p> : null}
                         <div id='player' className={this.state.hide}>
-                            {this.state.source === '' ? <p></p>:  <iframe width="100%" title="vid" height="100%" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://localhost:3000&autoplay=1&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
+                            {this.state.source === '' ? <p></p>:  <iframe width="100%" title="vid" height="100%" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://localhost:3000&autoplay=1&controls=0&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
                         </div>
                         <section className="vid_controls">
                             <input name="vid" id="vid" value={this.state.sourceInput} placeholder="Enter YouTube URL here!" onChange={(e) => this.updateSource(e)}/>
@@ -182,9 +191,9 @@ export default class TheaterRoom extends Component {
                         <ul id="chat" className="chat">{this.state.message.length ? this.state.message.map((item, index) => {
                             return <li key={index}>{item}</li> }) : null}
                         </ul>
-                        <form className="message_box">
-                            <input name="chat_message" id="chat_message" className="chat_message" value={this.state.input} onChange={(e) => this.handleChange(e)} />
-                            <button type="submit" className="chat_button" onClick={(e) => this.handleSubmitMessage(e)}>Chat</button>
+                        <form id="message_box" className="message_box" onSubmit={(e) => this.handleSubmitMessage(e)}>
+                            <textarea name="chat_message" id="chat_message" onKeyDown={e => this.submitChat(e)} className="chat_message" value={this.state.input} onChange={(e) => this.handleChange(e)} />
+                            <button type="submit" className="chat_button">Chat</button>
                         </form>
                     </section>
                 </section>

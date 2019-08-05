@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Blinker', sans-serif;
 }
 html {
     height: 100vh;
@@ -11,6 +11,15 @@ body {
 button:hover {
     cursor: pointer;
 }
+nav {
+    background-color: #322f37;
+    color: white;
+    border-bottom: 1px solid rgb(140, 234, 247);
+}
+.instructions {
+    color: rgb(140, 234, 247);
+    font-size: 25px;
+}
 .vid_controls {
     display: flex;
     flex-direction: column;
@@ -20,13 +29,15 @@ button:hover {
     justify-content: center;
     background-color: #322f37;
     padding: 10px;
-    border-radius: 0;
+    border-radius: 5px;
+    border: 1px solid rgb(140, 234, 247);
 }
 .pause, .play, .submit {
     height: 25px;
     width: 100px;
-    background-color: white;
-    border: 1px solid black;
+    background-color: #0f0e11;
+    color: rgb(140, 234, 247);
+    border: none;
     border-radius: 10px;
 }
 .vid_controls input {
@@ -36,27 +47,62 @@ button:hover {
     padding: 0;
     border: none;
 }
-.chat_message {
-    padding: 0;
-    font-size: 16px;
-}
 .chat_button {
-    border: 1px solid gray;
+    background-color: #0f0e11;
+    color: rgb(140, 234, 247);
     margin-left: 5px;
     width: 60px;
     padding: 0;
     height: 30px;
     font-size: 16px;
+    border-radius: 7px;
+}
+#vid {
+    border-radius: 25px;
+    padding-left: 10px;
+    background-color: #322f37;
+    border: 1px solid rgb(140, 234, 247);
+    font-size: 16px;
+    color: white;
 }
 .chat_button:hover {
     color: white;
     background-color: black;
+}
+.chat_message:focus, #vid:focus {
+    outline-width: 0;
+}
+.chat_message {
+    color: white;
+    font-size: 16px;
+    border-radius: 25px; 
+    padding-left: 10px;
+    background-color: #322f37;
+    border: 1px solid rgb(140, 234, 247);
+}
+.pause:hover, .play:hover, .submit:hover, .home_button:hover {
+    background-color: black;
+    color: white;
+}
+.home_button, .logout_button {
+    background-color: #0f0e11;
+    color: rgb(140, 234, 247);
+    margin-bottom: 10px;
 }
 .chat {
     color: white;
 }
 .room_main_content {
     background-color: #0f0e11;
+}
+.hidden {
+    display: none;
+}
+.notHidden {
+    display: block;
+}
+.blank {
+    display: none;
 }
 @media screen and (min-width: 1201px) {
     html {
@@ -71,20 +117,24 @@ button:hover {
         display: flex;
         width: 100%;
         justify-content: center;
-        background-color: lightgray;
+    }
+    nav h2 {
+        font-size: 35px;
     }
     .home_button {
         width: 125px;
-        height: 25px;
+        height: 40px;
         margin-right: 15px;
-        margin-top: 0px;
+        margin-top: 12px;
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        padding-bottom: 0px;
         border: none;
+        padding-bottom: 0px;
         position: fixed;
         right: 140px;
+        border-radius: 20px;
+        font-size: 16px;
     }
     .home_button:hover {
         cursor: pointer;
@@ -93,7 +143,10 @@ button:hover {
     }
     .logout_button {
         position: fixed;
+        height: 40px;
         right: 0;
+        border-radius: 20px;
+        font-size: 16px;
     }
     .room_page {
         height: 100vh;
@@ -103,6 +156,28 @@ button:hover {
         justify-content: center;
         align-items: flex-end;
         height: 100vh;
+        width: 100%;
+    }
+    #vid {
+        height: 40px;
+    }
+    .pause, .play, .submit {
+        height: 35px;
+        width: 100px;
+        background-color: #0f0e11;
+        color: rgb(140, 234, 247);
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    .submit {
+        margin-bottom: 5px;
+    }
+    .pause {
+        margin-right: 5px;
+    }
+    .play {
+        margin-left: 5px;
     }
     .video {
         width: 80%;
@@ -118,25 +193,17 @@ button:hover {
         margin-left: 15px;
         align-self: center;
     }
-    .hidden {
-        display: none;
-    }
-    .notHidden {
-        display: block;
-    }
-    .blank {
-        display: none;
-    }
     .vid_controls {
         display: flex;
         flex-direction: column;
         width: 400px;
-        height: 100px;
+        height: 140px;
         align-items: center;
         justify-content: center;
         background-color: #322f37;
         padding: 10px;
         border-radius: 10px;
+        margin-top: 10px;
     }
     .vid_controls input {
         width: 300px;
@@ -156,15 +223,17 @@ button:hover {
         justify-content: flex-end;
         height: 100%;
         width: 20%;
-        align-items: center;
-        border: 1px solid lightslategray;
+        align-items: flex-end;
+        border: 1px solid #322f37;
         border-right: none;
         border-bottom: none;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     .chat {
         list-style-type: none;
         padding-left: 0px;
-        width: 90%;
+        width: 80%;
         margin-top: 80px;
         max-height: 100%;
         text-align: left;
@@ -177,11 +246,17 @@ button:hover {
     .message_box {
         width: 100%;
         margin-bottom: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
     .chat_message {
-        height: 30px;
-        border: 1px solid black;
-        width: 75%;
+        padding-left: 15px;
+        padding-top: 10px;
+        max-height: 80px;
+        width: 70%;
+        overflow-y: auto;
     }
 }
 @media screen and (min-width: 901px) and (max-width: 1200px) {
@@ -197,11 +272,28 @@ button:hover {
         display: flex;
         width: 100%;
         justify-content: center;
-        background-color: lightgray;
+    }
+    .home_button {
+        width: 125px;
+        height: 40px;
+        margin-right: 15px;
+        margin-top: 12px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        border: none;
+        padding-bottom: 0px;
+        position: fixed;
+        right: 140px;
+        border-radius: 20px;
+        font-size: 16px;
     }
     .logout_button {
         position: fixed;
+        height: 40px;
         right: 0;
+        border-radius: 20px;
+        font-size: 16px;
     }
     .room_page {
         height: 100vh;
@@ -215,22 +307,23 @@ button:hover {
     }
     .video {
         width: 100%;
-        height: 50%;
+        height: 70%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
+        align-self: center;
     }
     #player {
         align-self: center;
         width: 100%;
-        min-height: 400px;
+        min-height: 350px;
     }
     .chat_box {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        height: 50%;
+        height: 30%;
         width: 100%;
         align-items: center;
     }
@@ -238,9 +331,9 @@ button:hover {
     .chat {
         list-style-type: none;
         padding-left: 0px;
-        width: 90%;
+        width: 70%;
         max-height: 250px;
-        text-align: right;
+        text-align: center;
         overflow-y: auto;
     }
     .chat li {
@@ -251,8 +344,7 @@ button:hover {
     }
     .chat_message {
         height: 30px;
-        border: 1px solid black;
-        width: 75%;
+        width: 50%;
     }
 }
 @media screen and (min-width: 601px) and (max-width: 900px) {
@@ -268,11 +360,26 @@ button:hover {
         display: flex;
         width: 100%;
         justify-content: center;
-        background-color: lightgray;
     }
     .logout_button {
         position: fixed;
         right: 0;
+        width: 75px;
+        height: 20px;
+    }
+    
+    .home_button {
+        width: 75px;
+        height: 20px;
+        margin-top: 12px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-left: 5px;
+        border: none;
+        position: fixed;
+        right: 100px;
     }
     .room_page {
         height: 100vh;
@@ -286,34 +393,34 @@ button:hover {
     }
     .video {
         width: 100%;
-        height: 50%;
+        height: 70%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
+        align-self: center;
     }
     #player {
         align-self: center;
         margin-top: 50px;
         width: 100%;
-        min-height: 400px;
+        min-height: 350px;
     }
     .chat_box {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        height: 50%;
+        height: 30%;
         width: 100%;
         align-items: center;
     }
-    
     .chat {
         list-style-type: none;
         padding-left: 0px;
-        width: 90%;
+        width: 50%;
         max-height: 250px;
         text-align: right;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
     .chat li {
         margin-right: 15px;
@@ -323,8 +430,7 @@ button:hover {
     }
     .chat_message {
         height: 30px;
-        border: 1px solid black;
-        width: 75%;
+        width: 45%;
     }
 }
 @media screen and (max-width: 600px) {
@@ -340,12 +446,27 @@ button:hover {
         display: flex;
         width: 100%;
         justify-content: center;
-        background-color: lightgray;
+        flex-direction: column;
     }
-    
+    nav h3 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
     .logout_button {
-        position: fixed;
-        right: 0;
+        margin-top: 0px;
+        margin-right: 5px;
+        height: 20px;
+    }
+    .home_button {
+        width: 125px;
+        height: 20px;
+        margin-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-left: 5px;
+        border: none;
     }
     .room_page {
         height: 100vh;
@@ -362,7 +483,7 @@ button:hover {
         height: 50%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
     }
     .vid_controls {
@@ -400,7 +521,6 @@ button:hover {
     }
     .chat_message {
         height: 30px;
-        border: 1px solid black;
         width: 75%;
     }
 }
