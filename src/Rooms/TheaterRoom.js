@@ -184,10 +184,10 @@ export default class TheaterRoom extends Component {
                         </div>
                         <section className="vid_controls">
                             <input name="vid" id="vid" value={this.state.sourceInput} placeholder="Enter YouTube URL here!" onChange={(e) => this.updateSource(e)}/>
-                            <button className="submit" type="submit" disabled={!this.disableSubmit()} onClick={(e) => this.handleSubmitVideo(e)}>New Video</button>
+                            <button className="submit" type="submit" disabled={!this.disableSubmit()} onClick={(e) => this.handleSubmitVideo(e)}>Submit Video</button>
                             <section className="pause_play">
                                 <button className="pause" onClick={() => this.togglePause(this.state.paused)}>Pause</button>
-                                <button className="play" onClick={() => this.togglePlay(this.state.paused)}>Play</button>
+                                <button className="play" onClick={() => this.togglePlay(this.state.paused)}>Resume</button>
                             </section>
                         </section>
                     </section>
