@@ -142,7 +142,7 @@ export default class RegistrationForm extends Component {
         return (
             <div className="Registration_form_div">
                 <nav>
-                    <h2>WeTube</h2>
+                    <h2 className="register_h2">WeTube</h2>
                 </nav>
                 <h2 className="register_title">Register for a WeTube account!</h2>
                 <section className="reg_form_container">

@@ -15,6 +15,7 @@ nav {
     background-color: #322f37;
     color: white;
     border-bottom: 1px solid rgb(140, 234, 247);
+    height: 80px;
 }
 .instructions {
     color: white;

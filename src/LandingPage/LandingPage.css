@@ -1,0 +1,45 @@
+.wetube {
+    font-size: 45px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+p {
+    font-size: 20px;
+}
+.welcome {
+    color: white;
+    font-size: 30px;
+}
+.midp {
+    margin-top: 0px;
+}
+.demop {
+    margin-top: 50px;
+}
+.userp {
+    margin-bottom: 5px;
+}
+.landing_page {
+    background-color: #0f0e11;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.emphasis_p {
+    font-size: 25px;
+    margin-top: 0px;
+    font-style: italic;
+}
+.landing_container {
+    background-color: #322f37;
+    width: 80%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(140, 234, 247);
+    border-radius: 10px;
+}

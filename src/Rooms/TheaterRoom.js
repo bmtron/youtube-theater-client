@@ -169,7 +169,7 @@ export default class TheaterRoom extends Component {
         return (
             <div className="room_page">
                 <nav className="room_nav">
-                    <h2>Theater Room {this.props.room}</h2>
+                    <h2 className="theater_h2">Theater Room {this.props.room}</h2>
                     <section className="nav_buttons">
                         <LogoutButton />
                         <Link to='/main'><button className="home_button">Home</button></Link>

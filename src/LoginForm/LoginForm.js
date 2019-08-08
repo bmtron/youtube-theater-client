@@ -44,7 +44,7 @@ export default class LoginForm extends Component {
         return (
             <div className="Login_form">
                 <nav>
-                    <h2>WeTube</h2>
+                    <h2 className="login_h2">WeTube</h2>
                 </nav>
                 <h2 className="login_title">Log In To WeTube!</h2>
                 <section className="login_container">
