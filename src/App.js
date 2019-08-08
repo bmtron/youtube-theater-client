@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import LoginPage from './LoginPage';
+import LoginPage from './LoginForm/LoginPage';
 import MainPage from './MainPage/MainPage';
-import RegistrationPage from './RegistrationPage';
+import RegistrationPage from './RegistrationForm/RegistrationPage';
 import LandingPage from './LandingPage/LandingPage';
 import PublicRoute from './Utils/PublicRoute';
 import PrivateRoute from './Utils/PrivateRoute'
 import RoomPage from './Rooms/RoomPage';
-import {Route} from 'react-router-dom';
 import './App.css';
 
 

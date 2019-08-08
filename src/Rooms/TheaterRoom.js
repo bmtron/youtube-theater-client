@@ -22,6 +22,8 @@ export default class TheaterRoom extends Component {
             sourceSent: false,
             hide: 'hidden'
         }
+
+        /*These socket functions receive info from server to update client*/
         socket.on('receive message', (payload) => {
             this.updateMessageFromSockets(payload)
             this.stayScrolledToBottom();
@@ -54,6 +56,7 @@ export default class TheaterRoom extends Component {
             message: [...this.state.message, payload.newCode]
         })
     }
+    /*Below function removes watch parameters from video link to allow embeddable video*/
     parseYoutubeLink(vid) {
         let newLink = vid.replace('watch?v=', 'embed/');
         return newLink;
@@ -100,7 +103,7 @@ export default class TheaterRoom extends Component {
     }
     componentDidMount() {
        const room = this.props.room;
-        socket.emit('room', {room: room, user: window.sessionStorage.getItem('user')})
+        socket.emit('room', {room: room, user: window.sessionStorage.getItem('user')})//creates and connects to a new room instance on server based on room title
         socket.on('welcome', payload => {
             this.setState({
                 welcome: payload
@@ -114,7 +117,7 @@ export default class TheaterRoom extends Component {
         
       }
     componentDidUpdate() {
-
+        /*Checks to see if a source has been provided. If so, runs checkforpause function to determine if function is paused */
         if (this.state.source === '') {
             return null;
         }
@@ -136,7 +139,7 @@ export default class TheaterRoom extends Component {
             iframe.contentWindow.postMessage(JSON.stringify({event: 'command', func: 'playVideo'}), '*')
         }
     }
-
+    /*togglePause and togglePlay emit a state change for all clients in the room, and will pause and play the video accordingly */
     togglePause = (state) => {
         socket.emit('pause', {
             room: this.props.room,

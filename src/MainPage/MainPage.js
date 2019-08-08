@@ -22,8 +22,7 @@ export default class MainPage extends Component {
         const {create_room} = ev.target
 
         const room = {
-            name: create_room.value,
-            password: 'blank'
+            name: create_room.value
         }
         this.setState({
             rooms: [...this.state.rooms, room]
