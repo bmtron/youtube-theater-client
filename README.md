@@ -1,3 +1,19 @@
+##WeTube
+
+Welcome to WeTube, the interactive video sharing app that lets you watch your favorite YouTube videos
+in real-time with your friends.
+
+To access the live version, click [here](https://bmmeehan3-youtube-theater-app.now.sh/).
+
+That link should bring you to the landing page, which gives a brief description of the app, and provides
+a link to either login (if you already have an account) or to register for a new account. 
+
+Landing Page: 
+
+There is also a demo account listed if you just want to check it out without the hassle of creating an 
+account.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

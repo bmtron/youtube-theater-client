@@ -182,7 +182,7 @@ export default class TheaterRoom extends Component {
                         <div className="blank"></div>
                         {this.state.source === '' ? <p className="instructions">Submit a YouTube link below to start sharing videos!</p> : null}
                         <div id='player' className={this.state.hide}>
-                            {this.state.source === '' ? <p></p>:  <iframe width="100%" title="vid" height="100%" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://localhost:3000&autoplay=1&controls=1&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
+                            {this.state.source === '' ? <p></p>:  <iframe width="100%" title="vid" height="100%" id="iframe" src={this.state.source.source + "?playsinline=1?origin=https://bmmeehan3-youtube-theater-app.now.sh&autoplay=1&controls=1&enablejsapi=1"} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; fullscreen;"></iframe>}
                         </div>
                         <section className="vid_controls">
                             <input name="vid" id="vid" value={this.state.sourceInput} placeholder="Enter YouTube URL here!" onChange={(e) => this.updateSource(e)}/>
