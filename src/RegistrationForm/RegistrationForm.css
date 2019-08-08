@@ -1,3 +1,9 @@
+nav {
+    background-color: #322f37;
+    color: white;
+    border-bottom: 1px solid rgb(140, 234, 247);
+    font-size: 30px;
+}
 .Registration_form_div {
     height: 100vh;
     background-color: #0f0e11;
