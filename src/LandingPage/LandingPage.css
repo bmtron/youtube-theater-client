@@ -1,3 +1,6 @@
+body {
+    background-color: #0f0e11;
+}
 .wetube {
     font-size: 45px;
     margin-top: 15px;
@@ -23,9 +26,9 @@ p {
     background-color: #0f0e11;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 .emphasis_p {
     font-size: 25px;
@@ -42,4 +45,14 @@ p {
     align-items: center;
     border: 1px solid rgb(140, 234, 247);
     border-radius: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+@media screen and (max-width: 1200px) {
+    .landing_page {
+        height: 100%;
+    }
+    .landing_nav {
+        position: static;
+    }
 }

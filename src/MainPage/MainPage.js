@@ -95,7 +95,7 @@ export default class MainPage extends Component {
     render() {
         return (
             <div>
-                <nav>
+                <nav className="main_nav">
                     <h2 className="site_title">WeTube</h2>
                     <LogoutButton />
                 </nav>

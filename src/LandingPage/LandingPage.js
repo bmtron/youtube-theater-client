@@ -6,9 +6,9 @@ export default class LandingPage extends Component {
     render() {
         return (
             <div className="landing_page">
-            <nav className="landing_nav">
-                <h2 className="wetube">WeTube</h2>
-            </nav>
+                <nav className="landing_nav">
+                    <h2 className="wetube">WeTube</h2>
+                </nav>
                 <section className="landing_container">
                     <h2 className="welcome">Welcome to WeTube!</h2>
                     <p>The interactive platform for sharing your favorite YouTube videos with all of your friends,</p>

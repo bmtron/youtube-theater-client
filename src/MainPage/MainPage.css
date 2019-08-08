@@ -99,10 +99,20 @@ form label {
     nav {
         position: static;
     }
+    .main_nav {
+        height: 110px;
+    }
     .create_room input {
         width: 95%;
     }
     .logout_button {
         height: 30px;
+    }
+    .rooms_container {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    .site_title {
+        margin-bottom: 0px;
     }
 }
