@@ -24,9 +24,6 @@ export default class MainPage extends Component {
         const room = {
             name: create_room.value
         }
-        this.setState({
-            rooms: [...this.state.rooms, room]
-        })
         fetch('https://agile-ravine-21756.herokuapp.com/api/rooms', {
             method: 'POST',
             headers: {
@@ -34,10 +31,17 @@ export default class MainPage extends Component {
             },
             body: JSON.stringify(room)
         })
-        .then(res => 
-            (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
+        .then(res => {
+            if(!res.ok){
+                return res.json().then(e => Promise.reject(e))
+            }
+            else {
+                this.setState({
+                    rooms: [...this.state.rooms, room]
+                })
+                return res.json()
+            }
+        }
         )
         .catch(err => {
             this.setState({
@@ -65,7 +69,6 @@ export default class MainPage extends Component {
             this.setState({
                 rooms: resJson
             })
-            console.log(resJson)
         })
         .catch(err => {
             this.setState({
@@ -107,6 +110,7 @@ export default class MainPage extends Component {
                     <form className="create_room" onSubmit={this.handleCreateRoom}>
                         <label htmlFor="create_room">Room Name</label>
                         <input name="create_room" id="create_room" type="text" value={this.state.roomName} onChange={e => this.updateRoomName(e.target.value)}/>
+                        {this.state.error === null ? null : <p>{this.state.error.error}</p>}
                         <ValidationError className="error" hasError={!this.state.roomNameValid} message={this.state.validationMessages.roomName}/>
                         <button className="create_button" disabled={!this.state.roomNameValid}>Create Room</button>
                     </form>
