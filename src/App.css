@@ -31,14 +31,3 @@
     transform: rotate(360deg);
   }
 }
-.Login_form, .Registration_form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.Login, .registration_form {
-  
-  display: flex;
-  width: 25%;
-  flex-direction: column;
-}

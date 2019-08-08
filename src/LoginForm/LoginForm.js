@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TokenService from '../services/TokenService';
 import { Link } from 'react-router-dom'
-
+import './LoginForm.css';
 
 export default class LoginForm extends Component {
     state = {error: null}
@@ -40,21 +40,25 @@ export default class LoginForm extends Component {
         })
     }
     render() {
+
         return (
             <div className="Login_form">
-                <h2>Log In</h2>
-                <form className="Login" onSubmit={this.handleSubmitJwtAuth}>
+                <h2 className="login_title">Log In To WeTube!</h2>
+                <section className="login_container">
+                    <form className="login_form" onSubmit={this.handleSubmitJwtAuth}>
 
-                    <label htmlFor="user_name">User Name</label>
-                    <input name="user_name" id="user_name" type="text" />
+                        <label htmlFor="user_name">User Name</label>
+                        <input name="user_name" id="user_name" type="text" />
 
-                    <label htmlFor="user_pass">Password</label>
-                    <input name="user_pass" id="user_pass" type="password" />
+                        <label htmlFor="user_pass">Password</label>
+                        <input name="user_pass" id="user_pass" type="password" />
 
-                    <button type="submit">Log In</button>
-                    {this.state.error !== null ? <p>{this.state.error}</p> : <p></p>}
-                    <Link to='/register'><button>Register Account</button></Link>
-                </form>
+                        <button className="login_submit" type="submit">Log In</button>
+                        {this.state.error !== null ? <p className="error">{this.state.error}</p> : <p></p>}
+                        <p className="register_p">Don't have an account? Click below to register!</p>
+                        <Link to='/register'><button className="register_link">Register Account</button></Link>
+                    </form>
+                </section>
             </div>
         )
     }

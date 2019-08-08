@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import ValidationError from '../Utils/ValidationError';
+import './MainPage.css';
+
 export default class MainPage extends Component {
     constructor(props) {
         super(props)
@@ -93,17 +95,29 @@ export default class MainPage extends Component {
     render() {
         return (
             <div>
-                <LogoutButton />
-                {this.state.rooms !== null ? this.state.rooms.map((item, index) => {
-                    return <Link key={index} to={`/rooms/${item.name}`}><button>Room {item.name}</button></Link>
-                }) : null}
-                <form className="create_room" onSubmit={this.handleCreateRoom}>
-                    <label htmlFor="create_room">Room Name</label>
-                    <input name="create_room" id="create_room" type="text" value={this.state.roomName} onChange={e => this.updateRoomName(e.target.value)}/>
-                    <ValidationError hasError={!this.state.roomNameValid} message={this.state.validationMessages.roomName}/>
+                <nav>
+                    <h2 className="site_title">WeTube</h2>
+                    <LogoutButton />
+                </nav>
 
-                    <button disabled={!this.state.roomNameValid}>Create Room</button>
-                </form>
+                <section className="main_page_main">
+                    <section className="main_directions">
+                        <h2>Welcome to WeTube!</h2>
+                        <p>Select a room to join below, or create your own!</p>
+                    </section>
+                    <form className="create_room" onSubmit={this.handleCreateRoom}>
+                        <label htmlFor="create_room">Room Name</label>
+                        <input name="create_room" id="create_room" type="text" value={this.state.roomName} onChange={e => this.updateRoomName(e.target.value)}/>
+                        <ValidationError className="error" hasError={!this.state.roomNameValid} message={this.state.validationMessages.roomName}/>
+                        <button className="create_button" disabled={!this.state.roomNameValid}>Create Room</button>
+                    </form>
+                    <section className="rooms_container">
+                    <h2 className="room_label">Available Rooms</h2>
+                        {this.state.rooms !== null ? this.state.rooms.map((item, index) => {
+                            return <Link key={index} to={`/rooms/${item.name}`}><button className="room_button">Room {item.name}</button></Link>
+                        }) : null}
+                    </section>
+                </section>
             </div>
         )
     }

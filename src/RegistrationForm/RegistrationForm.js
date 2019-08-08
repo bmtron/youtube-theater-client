@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ValidationError from '../Utils/ValidationError';
+import './RegistrationForm.css';
 
 export default class RegistrationForm extends Component {
     
@@ -139,28 +140,31 @@ export default class RegistrationForm extends Component {
     render() {
 
         return (
-            <div className="Registration_form">
+            <div className="Registration_form_div">
+                <h2 className="register_title">Register for a WeTube account!</h2>
+                <section className="reg_form_container">
+                    <form className="registration_form" onSubmit={this.handleSubmit}>
 
-                <form className="registration_form" onSubmit={this.handleSubmit}>
+                        <label htmlFor="reg_user_name">Username</label>
+                        <input name="reg_user_name" id="register_user_name" type="text" defaultValue={''} onChange={e => this.updateUserName(e.target.value)}/>
+                        <ValidationError hasError={!this.state.userNameValid} message={this.state.validationMessages.user_name}/>
+                        {this.state.error === null ? null : <p>{this.state.error}</p>}
 
-                    <label htmlFor="reg_user_name">Username</label>
-                    <input name="reg_user_name" id="register_user_name" type="text" defaultValue={''} onChange={e => this.updateUserName(e.target.value)}/>
-                    <ValidationError hasError={!this.state.userNameValid} message={this.state.validationMessages.user_name}/>
-                    {this.state.error === null ? null : <p>{this.state.error}</p>}
+                        <label htmlFor="reg_user_pass">Password</label>
+                        <input name="reg_user_pass" id="register_user_pass" type="password" onChange={(e) => this.updatePassword(e.target.value)}/>
+                        <ValidationError hasError={!this.state.passwordValid} message={this.state.validationMessages.password}/>
 
-                    <label htmlFor="reg_user_pass">Password</label>
-                    <input name="reg_user_pass" id="register_user_pass" type="password" onChange={(e) => this.updatePassword(e.target.value)}/>
-                    <ValidationError hasError={!this.state.passwordValid} message={this.state.validationMessages.password}/>
-
-                    <label htmlFor="reg_user_repeat_pass">Repeat Password</label>
-                    <input name="reg_user_repeat_pass" id="reg_user_repeat_pass" type="password" onChange={e => this.updateRepeatPassword(e.target.value)}/>
-                    <ValidationError hasError={!this.state.repeatPasswordValid} message={this.state.validationMessages.repeatPassword}/>
-                    <button 
-                        type="submit" 
-                        disabled={!this.state.formValid}>Register</button>
-                </form>
-                <p>Already have an account? Login below!</p>
-                <Link to="/login"><button>Login</button></Link>
+                        <label htmlFor="reg_user_repeat_pass">Repeat Password</label>
+                        <input name="reg_user_repeat_pass" id="reg_user_repeat_pass" type="password" onChange={e => this.updateRepeatPassword(e.target.value)}/>
+                        <ValidationError hasError={!this.state.repeatPasswordValid} message={this.state.validationMessages.repeatPassword}/>
+                        <button 
+                            className="register_submit"
+                            type="submit" 
+                            disabled={!this.state.formValid}>Register</button>
+                    </form>
+                    <p>Already have an account? Login below!</p>
+                    <Link to="/login"><button className="login_link">Login</button></Link>
+                </section> 
             </div>
         )
     }

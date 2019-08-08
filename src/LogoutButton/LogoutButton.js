@@ -10,7 +10,7 @@ export default class LogoutButton extends Component {
       }
     render() {
         return (
-            <Link to='/' onClick={() => this.handleLogoutClick()}><button className="logout_button">Logout</button></Link>
+            <Link to='/login' onClick={() => this.handleLogoutClick()}><button className="logout_button">Logout</button></Link>
         )
     }
 }
