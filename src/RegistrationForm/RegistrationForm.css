@@ -56,3 +56,11 @@ p {
     color: white;
     font-size: 18px;
 }
+@media screen and (max-width: 900px) {
+    .reg_form_container {
+        width: 95%;
+    }
+    .registration_form input{
+        width: 90%;
+    }
+}
