@@ -63,7 +63,6 @@ export default class TheaterRoom extends Component {
     }
     handleSubmitMessage = (e) => {
         e.preventDefault();
-        console.log('clicked');
         socket.emit('message', {
             room: this.props.room,
             newCode: `${window.sessionStorage.getItem('user')}: ${this.state.input}`

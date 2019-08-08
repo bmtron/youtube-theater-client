@@ -110,7 +110,6 @@ export default class RegistrationForm extends Component {
             user_name: user_name,
             password: password
         }
-        console.log(user)
         fetch('https://agile-ravine-21756.herokuapp.com/api/users', {
             method: 'POST',
             headers: {

@@ -14,7 +14,6 @@ export default class LoginForm extends Component {
             user_name: user_name.value,
             password: user_pass.value
         }
-        console.log(user)
         
         fetch('https://agile-ravine-21756.herokuapp.com/api/auth/login', {
             method: 'POST',
