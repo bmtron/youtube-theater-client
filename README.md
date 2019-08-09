@@ -1,4 +1,4 @@
-##WeTube
+## WeTube
 
 Welcome to WeTube, the interactive video sharing app that lets you watch your favorite YouTube videos
 in real-time with your friends.
@@ -8,7 +8,7 @@ To access the live version, click [here](https://bmmeehan3-youtube-theater-app.n
 That link should bring you to the landing page, which gives a brief description of the app, and provides
 a link to either login (if you already have an account) or to register for a new account. 
 
-Landing Page: ![screenshot of landing page](https://gyazo.com/ae2c4963fca8d31d89be65801e1d69db)
+Landing Page: ![screenshot of landing page](https://i.gyazo.com/ae2c4963fca8d31d89be65801e1d69db.png)
 
 There is also a demo account listed if you just want to check it out without the hassle of creating an 
 account.
@@ -16,15 +16,15 @@ account.
 Once you register an account and login, you will be taken to the main lobby, where you can select
 from any of the available rooms to join and start sharing, or create a room of your own.
 
-Main Lobby: ![screenshot of main lobby](https://gyazo.com/c53400482c5a662fb8b52a899cb346e3)
+Main Lobby: ![screenshot of main lobby](https://i.gyazo.com/c53400482c5a662fb8b52a899cb346e3.png)
 
 Once you select a room, you are brought to the theater page, where you can simply add a youtube link to the input field 
 
-![screenshot of link input](https://gyazo.com/2d44ab11614b27657eb1243e582a1740)
+![screenshot of link input](https://i.gyazo.com/2d44ab11614b27657eb1243e582a1740.png)
 
 and press 'Submit Video'. The video will automatically start playing on all clients connected to that same room.
 
-![working theater room with playing video](https://gyazo.com/f2b64c71480cdaab23308045fee25718)
+![working theater room with playing video](https://i.gyazo.com/f2b64c71480cdaab23308045fee25718.png)
 
 There is also a live chat for you to share reactions and thoughts with everyone connected to the room as
 well.
