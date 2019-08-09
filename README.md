@@ -29,6 +29,10 @@ and press 'Submit Video'. The video will automatically start playing on all clie
 There is also a live chat for you to share reactions and thoughts with everyone connected to the room as
 well.
 
+## Technology
+
+WeTube was created with a multitude of different technologies. The client was built using HTML5 and CSS for the skeleton and skin, respectively, and uses React.js to deliver the main functionality. The backend uses Node.js and Express, and uses PostgreSQL as the database. Socket.io was used to deliver the real-time interactivity to the app.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
