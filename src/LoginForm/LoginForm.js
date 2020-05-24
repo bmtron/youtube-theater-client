@@ -56,6 +56,10 @@ export default class LoginForm extends Component {
                         <input name="user_pass" id="user_pass" type="password" />
 
                         <button className="login_submit" type="submit">Log In</button>
+                        <p className="demop">Give the app a try!</p>
+                        <p className="midp">Login to the demo account with the following credentials:</p>
+                        <p className="userp">Username: testTube</p>
+                        <p className="midp">Password: Testpass!1</p>
                         {this.state.error !== null ? <p className="error">{this.state.error}</p> : <p></p>}
                         <p className="register_p">Don't have an account? Click below to register!</p>
                         <Link to='/register'><button className="register_link">Register Account</button></Link>

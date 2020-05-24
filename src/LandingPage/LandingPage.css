@@ -1,10 +1,19 @@
 body {
     background-color: #0f0e11;
 }
+.logo_container {
+    height: 50vh;
+}
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
 .wetube {
-    font-size: 45px;
+    font-size: 60px;
     margin-top: 15px;
     margin-bottom: 15px;
+    color: rgb(140, 234, 247);
 }
 p {
     font-size: 20px;
@@ -15,12 +24,14 @@ p {
 }
 .midp {
     margin-top: 0px;
+    margin-bottom: 10px;
 }
 .demop {
-    margin-top: 50px;
+    margin-top: 25px;
 }
 .userp {
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 .landing_page {
     background-color: #0f0e11;
@@ -45,8 +56,13 @@ p {
     align-items: center;
     border: 1px solid rgb(140, 234, 247);
     border-radius: 10px;
-    margin-top: 100px;
     margin-bottom: 25px;
+}
+.mainpage_screenshot {
+    width: 90%;
+}
+.mainpage_screenshot img {
+    border-radius: 10px;
 }
 @media screen and (max-width: 14px) {
     .landing_page {

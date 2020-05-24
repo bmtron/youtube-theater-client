@@ -5,6 +5,7 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import './TheaterRoom.css';
 
 const endpoint = "https://agile-ravine-21756.herokuapp.com/";
+const testE = "http://localhost:8000/";
 const socket = socketIOClient(endpoint);
 
 
@@ -65,7 +66,10 @@ export default class TheaterRoom extends Component {
         e.preventDefault();
         socket.emit('message', {
             room: this.props.room,
-            newCode: `${window.sessionStorage.getItem('user')}: ${this.state.input}`
+            newCode: {
+                user: window.sessionStorage.getItem('user') + ':',
+                message: this.state.input
+            }
         })
         this.setState({
             input: ''
@@ -167,7 +171,7 @@ export default class TheaterRoom extends Component {
         }
     }
     render() {
-
+        console.log(this.state.message)
         return (
             <div className="room_page">
                 <nav className="room_nav">
@@ -195,7 +199,7 @@ export default class TheaterRoom extends Component {
                     </section>
                     <section className="chat_box">
                         <ul id="chat" className="chat">{this.state.message.length ? this.state.message.map((item, index) => {
-                            return <li key={index}>{item}</li> }) : null}
+                            return <li key={index}><span className="user_chat_span">{item.user}</span> {item.message}</li> }) : null}
                         </ul>
                         <form id="message_box" className="message_box" onSubmit={(e) => this.handleSubmitMessage(e)}>
                             <textarea name="chat_message" id="chat_message" onKeyDown={e => this.submitChat(e)} className="chat_message" value={this.state.input} onChange={(e) => this.handleChange(e)} />
