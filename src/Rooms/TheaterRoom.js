@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
 import { Link } from 'react-router-dom'
 import LogoutButton from '../LogoutButton/LogoutButton';
+import { API_ENDPOINT } from '../config'
 import './TheaterRoom.css';
+import { io } from 'socket.io-client'
 
-const endpoint = "https://agile-ravine-21756.herokuapp.com/";
-const testE = "http://localhost:8000/";
-const socket = socketIOClient(endpoint);
+const endpoint = API_ENDPOINT
+const socket = io(API_ENDPOINT)
 
 
 export default class TheaterRoom extends Component {

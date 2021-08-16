@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import ValidationError from '../Utils/ValidationError';
 import './MainPage.css';
+import { API_ENDPOINT } from '../config';
 
+const endpoint = API_ENDPOINT
 export default class MainPage extends Component {
     constructor(props) {
         super(props)
@@ -24,7 +26,7 @@ export default class MainPage extends Component {
         const room = {
             name: create_room.value
         }
-        fetch('https://agile-ravine-21756.herokuapp.com/api/rooms', {
+        fetch(endpoint + 'api/rooms', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -53,7 +55,7 @@ export default class MainPage extends Component {
         })
     }
     componentDidMount() {
-        fetch('https://agile-ravine-21756.herokuapp.com/api/rooms', {
+        fetch(endpoint + 'api/rooms', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json'

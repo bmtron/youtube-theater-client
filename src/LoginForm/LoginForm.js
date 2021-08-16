@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import TokenService from '../services/TokenService';
 import { Link } from 'react-router-dom'
 import './LoginForm.css';
+import { API_ENDPOINT } from '../config';
 
+const endpoint = API_ENDPOINT;
 export default class LoginForm extends Component {
     state = {error: null}
 
@@ -15,7 +17,7 @@ export default class LoginForm extends Component {
             password: user_pass.value
         }
         
-        fetch('https://agile-ravine-21756.herokuapp.com/api/auth/login', {
+        fetch(endpoint + 'api/auth/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

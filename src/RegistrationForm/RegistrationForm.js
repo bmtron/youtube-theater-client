@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ValidationError from '../Utils/ValidationError';
 import './RegistrationForm.css';
+import {API_ENDPOINT} from '../config'
+
+const endpoint = API_ENDPOINT
 
 export default class RegistrationForm extends Component {
     
@@ -110,7 +113,7 @@ export default class RegistrationForm extends Component {
             user_name: user_name,
             password: password
         }
-        fetch('https://agile-ravine-21756.herokuapp.com/api/users', {
+        fetch(endpoint + 'api/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

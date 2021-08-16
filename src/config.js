@@ -1,4 +1,3 @@
-export default {
-    API_ENDPOINT: 'http://localhost:8000',
-    TOKEN_KEY: 'youtube-client-auth-token'
+module.exports = {
+    API_ENDPOINT: 'https://radiant-thicket-13778.herokuapp.com/' //http://localhost:8000 //local server for testing
 }
