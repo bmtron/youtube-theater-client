@@ -3,14 +3,20 @@ import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'universal-cookie';
+import { API_ENDPOINT, COOKIE_API_ENDPOINT } from '../config';
 
 
-
-
+const cookieEndpoint = COOKIE_API_ENDPOINT;
 const cookies = new Cookies();
 
 export default class LandingPage extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: null,
+            error: null
+        }
+    }
     componentDidMount() {
         let uuid = uuidv4();
         let currentDateObj = new Date();
@@ -18,9 +24,9 @@ export default class LandingPage extends Component {
         let currentTime = "" + currentDateObj.getHours() + ":" + currentDateObj.getMinutes() + ":" + currentDateObj.getSeconds();
 
         let expirationDateObj = new Date();
-        console.log(expirationDateObj)
+
         let expirationDate = new Date(expirationDateObj.getFullYear() + 1, (expirationDateObj.getMonth()), expirationDateObj.getDate())
-        console.log("asdfadf: " + expirationDate)
+
 
         let currentDateTime = currentDate + " " + currentTime;
 
@@ -44,6 +50,7 @@ export default class LandingPage extends Component {
         cookies.set("time", currentDateTime, {sameSite: "none", secure: true, expires: expirationDate});
         cookies.set("pagelocation", "landingpage", {sameSite: 'none', secure: true, expires: expirationDate});
         cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true, expires: expirationDate});
+        this.insertCookie()
     }
     updateCookies(currentDateTime, expirationDate) {
         let currentUuid = cookies.get("uuid")
@@ -51,10 +58,53 @@ export default class LandingPage extends Component {
             cookies.set("time", currentDateTime, {sameSite: "none", secure: true, expires: expirationDate})
             cookies.set("pagelocation", "landingpage", {sameSite: "none", secure: true, expires: expirationDate})
             cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true, expires: expirationDate})
+            this.insertCookie()
         } else {
             let newUuid = uuidv4();
             this.createCookies(newUuid)
         }
+    }
+
+    insertCookie() {
+console.log(process.env)
+        let time = cookies.get("time");
+        time = time.split(" ")
+        let date = time[0]
+        time = time[1].split(":")
+
+
+        for (let i = 0; i < time.length; i++) {
+            if (time[i].length < 2) {
+                time[i] = "0" + time[i];
+            }
+        }
+        let newTime = time.join(":");
+        let finalDateTime = date + " " + newTime
+
+        const cookie = {
+            uuid: cookies.get("uuid"),
+            time: finalDateTime,
+            page: cookies.get("pagelocation"),
+            agentdata: cookies.get("agentdata")
+        }
+
+        fetch(cookieEndpoint + "api/cookies?auth=" + process.env.KEY, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(cookie)
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        )
+        .catch(res => {
+            this.setState({
+                error: res.error
+            })
+        })
     }
 
     render() {

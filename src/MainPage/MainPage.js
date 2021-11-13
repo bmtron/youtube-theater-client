@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import ValidationError from '../Utils/ValidationError';
 import './MainPage.css';
-import { API_ENDPOINT } from '../config';
+import { API_ENDPOINT, COOKIE_API_ENDPOINT } from '../config';
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'universal-cookie';
 
 
 
 const endpoint = API_ENDPOINT
+const cookieEndpoint = COOKIE_API_ENDPOINT
 const cookies = new Cookies();
 
 export default class MainPage extends Component {
@@ -83,6 +84,7 @@ export default class MainPage extends Component {
                 error: err
             })
         });
+        
         let uuid = uuidv4();
         let currentDateObj = new Date();
         let currentDate = "" + currentDateObj.getUTCFullYear() + "-" + (currentDateObj.getMonth()+ 1) + "-" + currentDateObj.getDate();
@@ -96,7 +98,6 @@ export default class MainPage extends Component {
         }
     }
     doCookiesExist() {
-        console.log(cookies.getAll())
 
         if (cookies.get("uuid") !== undefined) {
             return true;
@@ -109,6 +110,7 @@ export default class MainPage extends Component {
         cookies.set("time", currentDateTime, {sameSite: "none", secure: true});
         cookies.set("pagelocation", "mainpage", {sameSite: 'none', secure: true});
         cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true});
+        this.insertCookie()
     }
     updateCookies(currentDateTime) {
         let currentUuid = cookies.get("uuid")
@@ -116,10 +118,52 @@ export default class MainPage extends Component {
             cookies.set("time", currentDateTime, {sameSite: "none", secure: true})
             cookies.set("pagelocation", "mainpage", {sameSite: "none", secure: true})
             cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true})
+            this.insertCookie()
         } else {
             let newUuid = uuidv4();
             this.createCookies(newUuid)
         }
+    }
+
+    insertCookie() {
+        let time = cookies.get("time");
+        time = time.split(" ")
+        let date = time[0]
+        time = time[1].split(":")
+
+
+        for (let i = 0; i < time.length; i++) {
+            if (time[i].length < 2) {
+                time[i] = "0" + time[i];
+            }
+        }
+        let newTime = time.join(":");
+        let finalDateTime = date + " " + newTime
+
+        const cookie = {
+            uuid: cookies.get("uuid"),
+            time: finalDateTime,
+            page: cookies.get("pagelocation"),
+            agentdata: cookies.get("agentdata")
+        }
+
+        fetch(cookieEndpoint + "api/cookies?auth=" + process.env.KEY, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(cookie)
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        )
+        .catch(res => {
+           this.setState({
+               error: res.error
+           })
+        })
     }
     validateRoomName(fieldValue) {
         const fieldErrors = {...this.state.validationMessages}
