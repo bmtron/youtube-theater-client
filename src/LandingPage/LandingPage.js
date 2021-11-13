@@ -1,8 +1,62 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
+import { v4 as uuidv4 } from 'uuid';
+import Cookies from 'universal-cookie';
+
+
+
+
+const cookies = new Cookies();
 
 export default class LandingPage extends Component {
+
+    componentDidMount() {
+        let uuid = uuidv4();
+        let currentDateObj = new Date();
+        let currentDate = "" + currentDateObj.getUTCFullYear() + "-" + (currentDateObj.getMonth()+ 1) + "-" + currentDateObj.getDate();
+        let currentTime = "" + currentDateObj.getHours() + ":" + currentDateObj.getMinutes() + ":" + currentDateObj.getSeconds();
+
+        let expirationDateObj = new Date();
+        console.log(expirationDateObj)
+        let expirationDate = new Date(expirationDateObj.getFullYear() + 1, (expirationDateObj.getMonth()), expirationDateObj.getDate())
+        console.log("asdfadf: " + expirationDate)
+
+        let currentDateTime = currentDate + " " + currentTime;
+
+        if (this.doCookiesExist()) {
+            this.updateCookies(currentDateTime, expirationDate);
+        } else {
+            this.createCookies(uuid, currentDateTime, expirationDate);
+        }
+    }
+    doCookiesExist() {
+        console.log(cookies.getAll())
+
+        if (cookies.get("uuid") !== undefined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    createCookies(uuid, currentDateTime, expirationDate) {
+        cookies.set('uuid', uuid, {sameSite: 'none', secure: true, expires: expirationDate});
+        cookies.set("time", currentDateTime, {sameSite: "none", secure: true, expires: expirationDate});
+        cookies.set("pagelocation", "landingpage", {sameSite: 'none', secure: true, expires: expirationDate});
+        cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true, expires: expirationDate});
+    }
+    updateCookies(currentDateTime, expirationDate) {
+        let currentUuid = cookies.get("uuid")
+        if (currentUuid !== "") {
+            cookies.set("time", currentDateTime, {sameSite: "none", secure: true, expires: expirationDate})
+            cookies.set("pagelocation", "landingpage", {sameSite: "none", secure: true, expires: expirationDate})
+            cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true, expires: expirationDate})
+        } else {
+            let newUuid = uuidv4();
+            this.createCookies(newUuid)
+        }
+    }
+
     render() {
         return (
             <div className="landing_page">

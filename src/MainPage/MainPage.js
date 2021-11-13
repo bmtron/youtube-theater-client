@@ -4,8 +4,14 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import ValidationError from '../Utils/ValidationError';
 import './MainPage.css';
 import { API_ENDPOINT } from '../config';
+import { v4 as uuidv4 } from 'uuid';
+import Cookies from 'universal-cookie';
+
+
 
 const endpoint = API_ENDPOINT
+const cookies = new Cookies();
+
 export default class MainPage extends Component {
     constructor(props) {
         super(props)
@@ -76,7 +82,44 @@ export default class MainPage extends Component {
             this.setState({
                 error: err
             })
-        })
+        });
+        let uuid = uuidv4();
+        let currentDateObj = new Date();
+        let currentDate = "" + currentDateObj.getUTCFullYear() + "-" + (currentDateObj.getMonth()+ 1) + "-" + currentDateObj.getDate();
+        let currentTime = "" + currentDateObj.getHours() + ":" + currentDateObj.getMinutes() + ":" + currentDateObj.getSeconds();
+        let currentDateTime = currentDate + " " + currentTime;
+
+        if (this.doCookiesExist()) {
+            this.updateCookies(currentDateTime);
+        } else {
+            this.createCookies(uuid, currentDateTime);
+        }
+    }
+    doCookiesExist() {
+        console.log(cookies.getAll())
+
+        if (cookies.get("uuid") !== undefined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    createCookies(uuid, currentDateTime) {
+        cookies.set('uuid', uuid, {sameSite: 'none', secure: true});
+        cookies.set("time", currentDateTime, {sameSite: "none", secure: true});
+        cookies.set("pagelocation", "mainpage", {sameSite: 'none', secure: true});
+        cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true});
+    }
+    updateCookies(currentDateTime) {
+        let currentUuid = cookies.get("uuid")
+        if (currentUuid !== "") {
+            cookies.set("time", currentDateTime, {sameSite: "none", secure: true})
+            cookies.set("pagelocation", "mainpage", {sameSite: "none", secure: true})
+            cookies.set("agentdata", navigator.userAgent, {sameSite: "none", secure: true})
+        } else {
+            let newUuid = uuidv4();
+            this.createCookies(newUuid)
+        }
     }
     validateRoomName(fieldValue) {
         const fieldErrors = {...this.state.validationMessages}

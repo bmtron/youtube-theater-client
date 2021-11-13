@@ -166,10 +166,15 @@ export default class TheaterRoom extends Component {
         chat.scrollTop = chat.scrollHeight;
     }
     submitChat = (e) => {
-        if (e.keyCode == 13 && e.shiftKey == false) {
+        if (e.key == 'Enter' && e.shiftKey == false && this.isValidInput()) {
             e.preventDefault();
             this.handleSubmitMessage(e)
         }
+    }
+    isValidInput = () => {
+        var input = this.state.input;
+
+        return input !== '';
     }
     render() {
         console.log(this.state.message)
