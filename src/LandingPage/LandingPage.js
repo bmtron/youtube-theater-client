@@ -37,7 +37,6 @@ export default class LandingPage extends Component {
         }
     }
     doCookiesExist() {
-        console.log(cookies.getAll())
 
         if (cookies.get("uuid") !== undefined) {
             return true;
@@ -66,7 +65,7 @@ export default class LandingPage extends Component {
     }
 
     insertCookie() {
-console.log(process.env)
+
         let time = cookies.get("time");
         time = time.split(" ")
         let date = time[0]
@@ -88,7 +87,7 @@ console.log(process.env)
             agentdata: cookies.get("agentdata")
         }
 
-        fetch(cookieEndpoint + "api/cookies?auth=" + process.env.KEY, {
+        fetch(cookieEndpoint + "api/cookies", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

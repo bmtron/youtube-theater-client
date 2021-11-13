@@ -177,7 +177,7 @@ export default class TheaterRoom extends Component {
         return input !== '';
     }
     render() {
-        console.log(this.state.message)
+   
         return (
             <div className="room_page">
                 <nav className="room_nav">

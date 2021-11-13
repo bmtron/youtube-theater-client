@@ -147,7 +147,7 @@ export default class MainPage extends Component {
             agentdata: cookies.get("agentdata")
         }
 
-        fetch(cookieEndpoint + "api/cookies?auth=" + process.env.KEY, {
+        fetch(cookieEndpoint + "api/cookies", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
