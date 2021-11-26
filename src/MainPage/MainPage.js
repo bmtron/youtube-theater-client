@@ -159,10 +159,8 @@ export default class MainPage extends Component {
                 ? res.json().then(e => Promise.reject(e))
                 : res.json()
         )
-        .catch(res => {
-           this.setState({
-               error: res.error
-           })
+        .catch(err => {
+           
         })
     }
     validateRoomName(fieldValue) {
