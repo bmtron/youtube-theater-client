@@ -18,7 +18,7 @@ export default class MainPage extends Component {
         super(props)
         this.state = {
             rooms: [1, 2],
-            error: null,
+            error: '',
             roomName: '',
             roomNameValid: false,
             validationMessages: {
